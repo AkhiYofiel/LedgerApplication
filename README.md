@@ -27,5 +27,5 @@ A .NET 8 Web API for recording deposits, withdrawals, and checking account balan
 
 ```bash
 git clone https://github.com/AkhiYofiel/LedgerApplication.git
-cd LedgerApplication/LedgerApplicationLedgerApplication/LedgerApplication
+cd LedgerApplication/LedgerApplication/LedgerApplication
 dotnet run
