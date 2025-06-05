@@ -1,0 +1,6 @@
+@LedgerApplication_HostAddress = http://localhost:5022
+
+GET {{LedgerApplication_HostAddress}}/transactioncontroller/
+Accept: application/json
+
+###
