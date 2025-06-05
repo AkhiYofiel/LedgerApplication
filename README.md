@@ -28,4 +28,6 @@ A .NET 8 Web API for recording deposits, withdrawals, and checking account balan
 ```bash
 git clone https://github.com/AkhiYofiel/LedgerApplication.git
 cd LedgerApplication/LedgerApplication/LedgerApplication
-dotnet run
+## **Swagger UI**
+Once the application is running, open your browser and go to:
+https://localhost:7237/swagger/index.html
