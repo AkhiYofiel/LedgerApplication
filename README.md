@@ -8,6 +8,7 @@ A .NET 8 Web API for recording deposits, withdrawals, and checking account balan
 - Get current balance
 - View transaction history
 - In-memory database (no external DB required)
+- Swaggerfor testing
 
 ## Technologies
 
