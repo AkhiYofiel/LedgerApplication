@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/LedgerApplication/.vs
+/LedgerApplication/Ledger.UniTests/bin
+/LedgerApplication/Ledger.UniTests/obj
+/LedgerApplication/LedgerApplication/bin/Debug/net8.0
+/LedgerApplication/LedgerApplication/obj
