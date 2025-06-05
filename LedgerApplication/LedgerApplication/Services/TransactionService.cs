@@ -15,15 +15,15 @@ namespace LedgerApplication.Services
         }
 
         /// <inheritdoc/>
-        public IEnumerable<Transaction> GetAllTransactions() => _ledgerContext.Transactions.OrderByDescending(t => t.DateOfTransaction);
+        public IEnumerable<Transaction> GetAllTransactions(string accountNumber) => _ledgerContext.Transactions.Where(t => t.AccountNumber == accountNumber).OrderByDescending(t => t.DateOfTransaction);
 
         /// <inheritdoc/>
-        public decimal GetBalance() => _ledgerContext.Transactions.Sum(t => t.Amount);
+        public decimal GetBalance(string accountNumber) => _ledgerContext.Transactions.Where(t => t.AccountNumber == accountNumber).Sum(t => t.Amount);
         
         /// <inheritdoc/>
         public TransactionResponse AddTransaction(TransactionRequest request)
         {
-            var currentBalance = GetBalance();
+            var currentBalance = GetBalance(request.AccountNumber);
 
             if (request.TransactionType.ToLowerInvariant() == "withdrawal" && request.Amount > currentBalance)
             {
@@ -35,6 +35,7 @@ namespace LedgerApplication.Services
 
             var transaction = new Transaction
             {
+                AccountNumber = request.AccountNumber,
                 TransactionType = request.TransactionType,
                 Amount = request.TransactionType.ToLowerInvariant() == "deposit" ? request.Amount : -request.Amount
             };
@@ -44,7 +45,7 @@ namespace LedgerApplication.Services
 
             return new TransactionResponse
             {
-                Message = $"Transaction successful. Current Balance: {GetBalance()}"
+                Message = $"Transaction successful. Current Balance: {GetBalance(transaction.AccountNumber)}"
             };
         }
     }

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ledger.UniTests.Services
 {
-
     public class TransactionServiceTests
     {
         private readonly LedgerContext _ledgerContext;
@@ -26,6 +25,7 @@ namespace Ledger.UniTests.Services
         {
             var request = new TransactionRequest
             {
+                AccountNumber = "123456",
                 TransactionType = "deposit",
                 Amount = 10
             };
@@ -39,10 +39,11 @@ namespace Ledger.UniTests.Services
         public void AddTransaction_Withdrawal_WithSufficientBalance_ShouldSucceed()
         {
             // Arrange - deposit first
-            _service.AddTransaction(new TransactionRequest { TransactionType = "deposit", Amount = 200m });
+            _service.AddTransaction(new TransactionRequest { AccountNumber = "11111" ,TransactionType = "deposit", Amount = 200m });
 
             var withdrawalRequest = new TransactionRequest
             {
+                AccountNumber = "11111",
                 TransactionType = "withdrawal",
                 Amount = 150m
             };
@@ -56,7 +57,8 @@ namespace Ledger.UniTests.Services
         public void AddTransaction_Withdrawal_WithInsufficientBalance_ShouldFail()
         {
             var withdrawalRequest = new TransactionRequest
-            {
+            { 
+                AccountNumber = "11111",
                 TransactionType = "withdrawal",
                 Amount = 100m
             };
@@ -70,13 +72,14 @@ namespace Ledger.UniTests.Services
         [Fact]
         public void GetAllTransations_ShouldReturnAllTransactions()
         {
-            _service.AddTransaction(new TransactionRequest { TransactionType = "deposit", Amount = 100 });
-            _service.AddTransaction(new TransactionRequest { TransactionType = "deposit", Amount = 1000 });
+            string accountNumber = "ACC1111";
+            _service.AddTransaction(new TransactionRequest {AccountNumber = accountNumber, TransactionType = "deposit", Amount = 100 });
+            _service.AddTransaction(new TransactionRequest {AccountNumber = accountNumber, TransactionType = "deposit", Amount = 1000 });
 
-            var history = _service.GetAllTransactions().ToList();
+            var history = _service.GetAllTransactions(accountNumber).ToList();
 
             Assert.Equal(2, history.Count);
-            Assert.Equal(1100, _service.GetBalance());
+            Assert.Equal(1100, _service.GetBalance(accountNumber));
         }
     }
 }

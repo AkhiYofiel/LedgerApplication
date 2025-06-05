@@ -8,7 +8,13 @@ namespace LedgerApplication.Models
         /// Key
         /// </summary>
         [Key]
-        public int Id { get; set; } 
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Account Number associated with the transaction
+        /// </summary>
+        public string AccountNumber { get; set; }
+
         /// <summary>
         /// Amount of the transaction
         /// </summary>

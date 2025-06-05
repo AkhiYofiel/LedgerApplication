@@ -14,27 +14,9 @@ namespace LedgerApplication.Controllers
             // Initialize services
             _transactionService = transactionService ?? throw new ArgumentNullException(nameof(transactionService));
         }
-        /// <summary>
-        /// Gets the current balance.
-        /// </summary>
-        /// <returns>The current balance as a decimal.</returns>
-        [HttpGet("balance")]
-        public IActionResult GetBalance()
-        {
-            var balance = _transactionService.GetBalance(); 
-            var response = new { message = $"Current Balance: {balance}" };
-            return Ok(response);
-        }
-
-            /// <summary>
-            ///Gets the transaction history.
-            ///</summary>
-            ///<returns>A list of transactions.</returns>
-            [HttpGet("transactionhistory")]
-        public IActionResult GetAllTransactions() => Ok(_transactionService.GetAllTransactions());
 
         /// <summary>
-        /// Record a new transaction.
+        /// Record a new transaction (deposit/withdrawal).
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -46,8 +28,28 @@ namespace LedgerApplication.Controllers
                 return BadRequest(ModelState);
             }
             var response = _transactionService.AddTransaction(request);
-                return Ok(response);
-            
+            return Ok(response);
+
         }
+
+        /// <summary>
+        /// Gets the current balance.
+        /// </summary>
+        /// <returns>The current balance as a decimal.</returns>
+        [HttpGet("balance")]
+        public IActionResult GetBalance([FromQuery]string accountNumber)
+        {
+            var balance = _transactionService.GetBalance(accountNumber); 
+            var response = new { message = $"Current Balance: {balance}" };
+            return Ok(response);
+        }
+
+            /// <summary>
+            ///Gets the transaction history.
+            ///</summary>
+            ///<returns>A list of transactions.</returns>
+            [HttpGet("transactionhistory")]
+        public IActionResult GetAllTransactions([FromQuery] string accountNumber) => Ok(_transactionService.GetAllTransactions(accountNumber));
+        
     }
 }

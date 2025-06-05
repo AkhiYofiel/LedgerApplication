@@ -12,12 +12,12 @@ namespace LedgerApplication.Services
         /// Retrieves the current balance of the ledger.
         /// </summary>
         /// <returns></returns>
-        decimal GetBalance();
+        decimal GetBalance(string accountNumber);
         /// <summary>
         /// Retrieves all transactions in the ledger, ordered by date.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Transaction> GetAllTransactions();
+        IEnumerable<Transaction> GetAllTransactions(string accountNumber);
         /// <summary>
         /// Adds a new transaction to the ledger.
         /// </summary>

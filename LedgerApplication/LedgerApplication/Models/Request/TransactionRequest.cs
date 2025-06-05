@@ -8,6 +8,12 @@ namespace LedgerApplication.Models.Request
     public class TransactionRequest
     {
         /// <summary>
+        /// AccountNumber
+        /// </summary>
+        [Required]
+        public required string AccountNumber { get; set; }
+
+        /// <summary>
         /// Amount
         /// </summary>
         [Required]
