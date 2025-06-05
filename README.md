@@ -30,4 +30,4 @@ git clone https://github.com/AkhiYofiel/LedgerApplication.git
 cd LedgerApplication/LedgerApplication/LedgerApplication
 dotnet run
 Once the application is running, open your browser and go to:
-https://localhost:7237/swagger/index.html
+(http://localhost:5022/swagger/index.html)
